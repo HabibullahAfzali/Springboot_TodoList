@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -21,4 +22,14 @@ public class UserService {
 
 		return userRepository.findAll();
 	}
+
+	public void DeleteUser(Long id){
+		Optional<User> userOptional = userRepository.findById(id);
+		if(userOptional.isEmpty()){
+			System.out.println("User not exist");
+		}
+		userRepository.deleteById(id);
+
+	}
+
 }
