@@ -1,4 +1,4 @@
-package Springboot.com.TodoListApi.Entity;
+package Springboot.com.TodoListApi.entities;
 
 import jakarta.persistence.*;
 @Entity
