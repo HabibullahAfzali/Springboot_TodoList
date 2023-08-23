@@ -1,5 +1,4 @@
 package Springboot.com.TodoListApi.entities;
-
 import jakarta.persistence.*;
 @Entity
 public class User {
