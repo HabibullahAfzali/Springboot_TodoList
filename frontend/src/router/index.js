@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import WelcomeView from "../views/Welcome.vue";
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -7,6 +8,11 @@ const router = createRouter({
       path: "/",
       name: "WelcomeView",
       component: WelcomeView,
+    },
+    {
+      path: "/devlist",
+      name: "DevList",
+      component: () => import("../views/Task.vue"),
     },
     {
       path: "/register",
