@@ -8,12 +8,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/register">Sign Up</a>
-            </li>
+             <router-link to="/" exact class="nav-link" exact-active-class="active">Home</router-link>
+             <router-link to="/register" exact class="nav-link" exact-active-class="active">Sign Up</router-link>
+           
+             <router-link to="/addtask" exact class="nav-link" exact-active-class="active">New Todolist</router-link>
+           
+             <router-link to="/tasklist" exact class="nav-link" exact-active-class="active">TodoLists</router-link>
           </ul>
         </div>
       </div>

@@ -11,14 +11,10 @@ const user = ref({
 });
 const route = useRouter();
 const signUp = () => {
-    // const formData = new FormData();
-    // formData.append('username', user.username);
-    // formData.append('email', user.email);
-    // formData.append('password', user.password);
-    // // formData.append('profilePicture', user.profilePicture);
     const newUser = {...user.value}
 
     axios.post('http://localhost:8080/users', newUser).then(() => {
+        
         alert("User successfully added!")
         route.push('/');
     }).catch(error => {
@@ -28,10 +24,6 @@ const signUp = () => {
         
     })
 }
-// const ProfilePictureUpload = event => {
-//     const file = event.target.files[0];
-//     user.profilePicture=file
-// }
 </script>
 <template>
     <main>
