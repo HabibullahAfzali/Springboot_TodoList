@@ -14,6 +14,29 @@ public class UserService {
 	@Autowired
 	private  UserRepository userRepository;
 
+
+	public void saveUser(User user) {
+		 userRepository.save(user);
+
+	}
+	public List<User> getAllUser(){
+
+		return userRepository.findAll();
+	}
+	public Optional<User> getUserById(Long userId){
+		return userRepository.findById(userId);
+
+	}
+
+	public void deleteUser(Long id){
+		Optional<User> userOptional = userRepository.findById(id);
+		if(userOptional.isEmpty()){
+			System.out.println("User not exist");
+		}
+		userRepository.deleteById(id);
+
+	}
+
 //	public void createUserWithProfilePicture(
 //			String username,
 //			String email,
@@ -35,11 +58,6 @@ public class UserService {
 //
 //		userRepository.save(user);
 //	}
-
-	public void saveUser(User user) {
-		 userRepository.save(user);
-
-	}
 //
 //	public void updateUserProfilePicture(Long userId, MultipartFile profilePicture){
 //		User user= userRepository.findById(userId).orElseGet(()->new User());
@@ -51,18 +69,6 @@ public class UserService {
 //		}
 //	}
 
-	public List<User> getAllUser(){
 
-		return userRepository.findAll();
-	}
-
-	public void DeleteUser(Long id){
-		Optional<User> userOptional = userRepository.findById(id);
-		if(userOptional.isEmpty()){
-			System.out.println("User not exist");
-		}
-		userRepository.deleteById(id);
-
-	}
 
 }

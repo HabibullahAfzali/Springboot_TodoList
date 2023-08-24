@@ -3,6 +3,7 @@ package Springboot.com.TodoListApi.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 @Entity
 public class Task {
@@ -17,7 +18,7 @@ public class Task {
 
 	private String title;
 	private String description;
-	private Date dueDate;
+	private LocalDateTime dueDate;
 	private boolean isCompleted;
 
 	public Task() {
@@ -55,11 +56,11 @@ public class Task {
 		this.description = description;
 	}
 
-	public Date getDueDate() {
+	public LocalDateTime getDueDate() {
 		return dueDate;
 	}
 
-	public void setDueDate(Date dueDate) {
+	public void setDueDate(LocalDateTime dueDate) {
 		this.dueDate = dueDate;
 	}
 
@@ -67,7 +68,7 @@ public class Task {
 		return isCompleted;
 	}
 
-	public void setisCompleted(boolean isCompleted) {
+	public void setIsCompleted(boolean isCompleted) {
 		this.isCompleted = isCompleted;
 	}
 }
