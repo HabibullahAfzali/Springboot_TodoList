@@ -58,7 +58,7 @@ onMounted(() => {
         <div class="container">
             <div class="row ">
                 <div class="col-md-12">
-                    <h1 class="text-center">Your Todo List</h1>
+                    <h1 class="text-center" style="color: hsl(218, 81%, 75%)">Your Todo List</h1>
                     <!--Add button -->
                     <div class="d-flex justify-content-end" id="newtask">
                         <a href="/addtask" class="btn btn-info">New Task</a>
