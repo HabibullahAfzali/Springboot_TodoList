@@ -30,8 +30,6 @@ const updateCompletionStatus = (task) => {
             console.error('Not able to update task:', error);
         });
 };
-
-
 const deleteTask = (id) => {
     axios
         .delete(`http://localhost:8080/tasks/${id}`)
@@ -46,7 +44,6 @@ const deleteTask = (id) => {
             console.error('Not able to fetch task:', error);
         });
 };
-
 onMounted(() => {
     getTasks();
 });
@@ -58,10 +55,12 @@ onMounted(() => {
         <div class="container">
             <div class="row ">
                 <div class="col-md-12">
-                    <h1 class="text-center" style="color: hsl(218, 81%, 75%)">Your Todo List</h1>
+                   <div class="d-flex mt-3 justify-content-center"> 
+                    <h1 style="color: hsl(218, 81%, 75%)">Your Todo List</h1>
+                    </div>
                     <!--Add button -->
                     <div class="d-flex justify-content-end" id="newtask">
-                        <a href="/addtask" class="btn btn-info">New Task</a>
+                        <a href="/addtask" class="btn btn-primary">New Task</a>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-hover">
@@ -88,7 +87,7 @@ onMounted(() => {
                                       </td>
 
                                     <td>
-                                        <a class="btn btn-info" :href="`/update/${task.id}`">Edit</a>
+                                        <a class="btn btn-primary" :href="`/update/${task.id}`">Edit</a>
                                         <button class="btn btn-danger mx-2" @click="deleteTask(task.id)">Delete</button>
                                     </td>
                                 </tr>
@@ -101,6 +100,4 @@ onMounted(() => {
 
     </main>
 </template>
-<style scoped>
-</style>
 

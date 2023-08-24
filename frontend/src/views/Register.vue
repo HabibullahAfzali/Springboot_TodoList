@@ -1,27 +1,27 @@
 <script setup>
 import Navbar from '../components/Navbar.vue';
-import {ref} from 'vue'
+import { ref } from 'vue'
 import axios from "axios";
 import { useRouter } from 'vue-router';
 
 const user = ref({
-    username:'',
-    email:'',
+    username: '',
+    email: '',
     password: ''
 });
 const route = useRouter();
 const signUp = () => {
-    const newUser = {...user.value}
+    const newUser = { ...user.value }
 
     axios.post('http://localhost:8080/users', newUser).then(() => {
-        
+
         alert("User successfully added!")
         route.push('/');
     }).catch(error => {
 
-        console.error('not able to add!',error)
-      
-        
+        console.error('not able to add!', error)
+
+
     })
 }
 </script>
@@ -49,31 +49,25 @@ const signUp = () => {
                         </h1>
                         <div class="card-body px-4 py-5 px-md-5">
                             <form @submit.prevent="signUp">
-                                 <!-- Profile Picture input -->
-                <!-- <div class="form-outline mb-4">
+                                <!-- Profile Picture input -->
+                                <!-- <div class="form-outline mb-4">
                   <input type="file" @change="ProfilePictureUpload" class="form-control" />
                 </div> -->
                                 <div class="form-outline mb-4">
                                     <input type="text" class="form-control center" v-model="user.username" />
                                     <label class="form-label" for="form3Example1">User name</label>
                                 </div>
-
-                                <!-- Password input -->
                                 <div class="form-outline mb-4">
-                                    <input type="email"  class="form-control" v-model="user.email" />
+                                    <input type="email" class="form-control" v-model="user.email" />
                                     <label class="form-label" for="form3Example2">Email</label>
                                 </div>
                                 <div class="form-outline mb-4">
                                     <input type="password" class="form-control" v-model="user.password" />
                                     <label class="form-label" for="form3Example4">Password</label>
                                 </div>
-
-                                <!-- Submit button -->
-                                <button type="submit" class="btn btn-primary btn-block mb-4 form-control" >
+                                <button type="submit" class="btn btn-primary btn-block mb-4 form-control">
                                     Submit
                                 </button>
-
-                                <!-- Register buttons -->
                                 <div class="text-center">
                                     <p> Alreday have an account </p>
                                     <a href="/Welcome">Login</a>
@@ -86,5 +80,3 @@ const signUp = () => {
         </div>
     </main>
 </template>
-
-

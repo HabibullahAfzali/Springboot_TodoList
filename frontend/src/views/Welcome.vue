@@ -28,17 +28,13 @@ import Navbar from '../components/Navbar.vue';
                                     <input type="text" id="form3Example1" class="form-control center" />
                                     <label class="form-label" for="form3Example1">User name</label>
                                 </div>
-                                <!-- Password input -->
                                 <div class="form-outline mb-4">
                                     <input type="password" id="form3Example4" class="form-control" />
                                     <label class="form-label" for="form3Example4">Password</label>
                                 </div>
-                                <!-- Submit button -->
                                 <button type="submit" class="btn btn-primary btn-block mb-4 w-100">
                                     Login
                                 </button>
-
-                                <!-- Register buttons -->
                                 <div class="text-center">
                                     <p> Not have an account </p>
                                     <a href="/register">Register</a>
@@ -51,9 +47,3 @@ import Navbar from '../components/Navbar.vue';
         </div>
     </main>
 </template>
-
-<style>
-.center {
-    text-align: center;
-}
-</style>
