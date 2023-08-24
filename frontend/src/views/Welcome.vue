@@ -34,7 +34,7 @@ import Navbar from '../components/Navbar.vue';
                                     <label class="form-label" for="form3Example4">Password</label>
                                 </div>
                                 <!-- Submit button -->
-                                <button type="submit" class="btn btn-primary btn-block mb-4">
+                                <button type="submit" class="btn btn-primary btn-block mb-4 w-100">
                                     Login
                                 </button>
 

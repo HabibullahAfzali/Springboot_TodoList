@@ -76,7 +76,7 @@ const signUp = () => {
                                 <!-- Register buttons -->
                                 <div class="text-center">
                                     <p> Alreday have an account </p>
-                                    <a href="/">Login</a>
+                                    <a href="/Welcome">Login</a>
                                 </div>
                             </form>
                         </div>
