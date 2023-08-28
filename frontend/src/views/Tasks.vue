@@ -5,6 +5,15 @@ import axios from 'axios';
 
 const tasks = ref([]);
 const searchQuery = ref('');
+const filterUsername = ref('');
+const filteredTasks = ref([]);
+
+const reminder = (task) => {
+    const currentDate = new Date();
+    const dueDateValue = new Date(task.dueDate);
+    const timeRemainingInDays = Math.ceil((dueDateValue - currentDate) / (1000 * 60 * 60 * 24));
+   return timeRemainingInDays < 2 ? "table-danger" : "";
+};
 
 const getTasks = () => {
     axios
@@ -18,14 +27,21 @@ const getTasks = () => {
             },
         })
         .then((res) => {
-            tasks.value = res.data;
+            tasks.value = res.data.map(task => {
+                return {
+                    ...task,
+                    isCompleted: task.isCompleted === 1
+
+                }
+            });
+            console.log(tasks)
         })
         .catch((error) => {
             console.error('Not able to fetch tasks:', error);
         });
 };
 const updateCompletionStatus = (task) => {
-    axios.put(`http://localhost:8080/tasks/${task.id}`, { ...task })
+    axios.put(`http://localhost:8080/tasks/${task.id}/complete`)
         .catch((error) => {
             console.error('Not able to update task:', error);
         });
@@ -44,6 +60,14 @@ const deleteTask = (id) => {
             console.error('Not able to fetch task:', error);
         });
 };
+const applyFilter = () => {
+    filteredTasks.value = tasks.value.filter(task => {
+        if (!filterUsername.value.trim() || task.user && task.user.username.toLowerCase().includes(filterUsername.value.toLowerCase())) {
+            return true;
+        }
+        return false;
+    });
+};
 onMounted(() => {
     getTasks();
 });
@@ -55,37 +79,41 @@ onMounted(() => {
         <div class="container">
             <div class="row ">
                 <div class="col-md-12">
-                   <div class="d-flex mt-3 justify-content-center"> 
-                    <h1 style="color: hsl(218, 81%, 75%)">Your Todo List</h1>
+                    <div class="d-flex mt-3 justify-content-center">
+                        <h1 style="color: hsl(218, 81%, 75%)">Your Todo List</h1>
                     </div>
                     <!--Add button -->
-                    <div class="d-flex justify-content-end" id="newtask">
+                    <div class="d-flex justify-content-start" id="newtask">
                         <a href="/addtask" class="btn btn-primary">New Task</a>
+                    </div>
+                    <div class="input-group mb-3 mt-3">
+                        <input type="text" class="form-control" v-model="filterUsername" @keyup.enter="applyFilter"
+                            placeholder="Enter username">
+                        <button class="btn btn-outline-primary" type="button" @click="applyFilter">Search</button>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                   
                                     <th scope="col">Title</th>
                                     <th scope="col">Description </th>
                                     <th scope="col">Due Date</th>
                                     <th scope="col">Assigned To</th>
-                                     <th scope="col">Is Completed?</th>
+                                    <th scope="col">Is Completed?</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="task in tasks" :key="task.id">
+                                <tr v-for="task in filteredTasks" :key="task.id" :class="reminder(task)" >
                                     <th scope="row">{{ task.title }}</th>
                                     <td>{{ task.description }}</td>
                                     <td>{{ task.dueDate }}</td>
                                     <td v-if="task.user">{{ task.user.username }}</td>
                                     <td v-else></td>
-                                     <td>
-                                        <input type="checkbox" v-model="task.isCompleted" @change="updateCompletionStatus(task)">
-                                      </td>
-
+                                    <td>
+                                        <input type="checkbox" v-model="task.isCompleted"
+                                            @change="updateCompletionStatus(task)">
+                                    </td>
                                     <td>
                                         <a class="btn btn-primary" :href="`/update/${task.id}`">Edit</a>
                                         <button class="btn btn-danger mx-2" @click="deleteTask(task.id)">Delete</button>

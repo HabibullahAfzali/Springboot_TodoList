@@ -39,7 +39,7 @@ const getTasks = () => {
             task.value.dueDate = res.data.dueDate.split('T')[0];
 
         })
-        .catch((error) => { console.error('Not able to fetch tasks:', error) });
+        .catch((error) => { console.error('Not able to fetch tasks:', error.response) });
 
 };
 const fetchUsers = () => {
