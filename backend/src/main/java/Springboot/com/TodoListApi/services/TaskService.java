@@ -1,7 +1,6 @@
 package Springboot.com.TodoListApi.services;
 
 import Springboot.com.TodoListApi.entities.Task;
-import Springboot.com.TodoListApi.entities.User;
 import Springboot.com.TodoListApi.repositories.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,9 +19,12 @@ public void createTask(Task task){
 public List<Task> getAllTask(){
 	return taskRepository.findAll();
 }
-	public Optional<Task> getTaskById(Long taskId){
-		return taskRepository.findById(taskId);
+	public Optional<Task> getTaskById(Long id){
+		return taskRepository.findById(id);
 
+	}
+	public void updateTaskStatus(Task task){
+		taskRepository.save(task);
 	}
 
 	public void deleteTask(Long id){

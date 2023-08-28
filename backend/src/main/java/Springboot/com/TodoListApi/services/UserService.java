@@ -23,15 +23,15 @@ public class UserService {
 
 		return userRepository.findAll();
 	}
-	public Optional<User> getUserById(Long userId){
-		return userRepository.findById(userId);
+	public Optional<User> getUserById(Long id){
+		return userRepository.findById(id);
 
 	}
 
 	public void deleteUser(Long id){
 		Optional<User> userOptional = userRepository.findById(id);
 		if(userOptional.isEmpty()){
-			System.out.println("User not exist");
+			System.out.println("User not exist with this ID: "+id);
 		}
 		userRepository.deleteById(id);
 

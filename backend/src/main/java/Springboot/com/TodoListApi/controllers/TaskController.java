@@ -23,7 +23,6 @@ public class TaskController {
 	private UserService userService;
 @PostMapping()
 	public ResponseEntity<String> AddTask(@RequestBody Task task){
-
 	User selectedUser = userService.getAllUser().stream().filter(user -> user.getId().equals(task.getUser().getId())).findFirst().
 			orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"User not found with ID: "+ task.getUser().getId()));
 	task.setUser((selectedUser));
@@ -43,16 +42,43 @@ public class TaskController {
 	@PutMapping("/{id}")
 	public ResponseEntity<String> editeTask(@RequestBody Task task, @PathVariable Long id) {
 		if (userService.getUserById(id).isPresent()) {
-			task.setId(id);
 			User selectedUser = userService.getAllUser().stream().filter(user -> user.getId().equals(task.getUser().getId())).findFirst().
-					orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"User not found with ID: "+ task.getUser().getId()));
+			orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"User not found with ID: "+ task.getUser().getId()));
 			task.setUser((selectedUser));
-			taskService.createTask(task);
+			taskService.updateTaskStatus(task);
 
 			return ResponseEntity.ok("Task Updated!");
 		}
 		return ResponseEntity.notFound().build();
 	}
+//	@PutMapping("/{id}/complete")
+//	public ResponseEntity<String> updateCompletionStatus(@PathVariable Long id) {
+//	Optional<Task> existingTaskOptional = taskService.getTaskById(id);
+//	if (existingTaskOptional.isPresent() & !existingTaskOptional.get().isCompleted()) {
+//		Task existingTask = existingTaskOptional.get();
+//			existingTask.setIsCompleted(true);
+//			taskService.updateTaskStatus(existingTask);
+//
+//			return ResponseEntity.ok("Completion Status Updated!");
+//		}
+//		return ResponseEntity.notFound().build();
+//	}
+
+	@PutMapping("/{id}/complete")
+	public ResponseEntity<String> updateCompletionStatus(@PathVariable Long taskId) {
+		Optional<Task> taskOptional = taskService.getTaskById(taskId);
+
+		if (taskOptional.isPresent()) {
+			Task task = taskOptional.get();
+			task.setIsCompleted(true);
+			taskService.updateTaskStatus(task);
+
+			return ResponseEntity.ok("Completion Status Updated!");
+		}
+
+		return ResponseEntity.notFound().build();
+	}
+
 
 
 
