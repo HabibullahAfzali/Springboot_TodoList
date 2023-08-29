@@ -10,20 +10,28 @@ const user = ref({
     password: ''
 });
 const route = useRouter();
+const profilePicture = ref(null);
+
+const handleProfilePictureUpload = (event) => {
+    profilePicture.value = event.target.files[0];
+}
+
 const signUp = () => {
-    const newUser = { ...user.value }
-
-    axios.post('http://localhost:8080/users', newUser).then(() => {
-
+    const formData = new FormData();
+    for (const key in user.value) {
+        formData.append(key, user.value[key]);
+    }
+    if (profilePicture.value) {
+        formData.append('image', profilePicture.value);
+    }
+    axios.post('http://localhost:8080/users', formData).then(() => {
         alert("User successfully added!")
         route.push('/');
     }).catch(error => {
-
-        console.error('not able to add!', error)
-
-
-    })
+        console.error('not able to add!', error);
+    });
 }
+
 </script>
 <template>
     <main>
@@ -50,9 +58,14 @@ const signUp = () => {
                         <div class="card-body px-4 py-5 px-md-5">
                             <form @submit.prevent="signUp">
                                 <!-- Profile Picture input -->
-                                <!-- <div class="form-outline mb-4">
-                  <input type="file" @change="ProfilePictureUpload" class="form-control" />
-                </div> -->
+                                <div class="form-outline mb-4">
+                                    <label class="profile-picture-label cursor-pointer" for="profilePictureInput">
+                                        <input type="file" @change="handleProfilePictureUpload($event)"
+                                            class="form-control d-none" id="profilePictureInput" ref="fileInput" />
+                                        <i class="bi bi-camera-fill"></i>
+                                        <span class="overlay-text">Change Photo</span>
+                                    </label>
+                                </div>
                                 <div class="form-outline mb-4">
                                     <input type="text" class="form-control center" v-model="user.username" />
                                     <label class="form-label" for="form3Example1">User name</label>
@@ -80,3 +93,36 @@ const signUp = () => {
         </div>
     </main>
 </template>
+
+<style scoped>
+.profile-picture-label {
+    display: inline-block;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: #c8d0d9;
+    text-align: center;
+    line-height: 120px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.profile-picture-label i {
+    font-size: 36px;
+}
+
+.profile-picture-label:hover {
+    background-color: #0056b3;
+}
+
+.overlay-text {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    font-weight: bold;
+    font-size: 14px;
+}
+</style>

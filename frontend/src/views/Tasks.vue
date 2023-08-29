@@ -12,7 +12,7 @@ const reminder = (task) => {
     const currentDate = new Date();
     const dueDateValue = new Date(task.dueDate);
     const timeRemainingInDays = Math.ceil((dueDateValue - currentDate) / (1000 * 60 * 60 * 24));
-   return timeRemainingInDays < 2 ? "table-danger" : "";
+    return timeRemainingInDays < 2 ? "table-danger" : "";
 };
 
 const getTasks = () => {
@@ -28,10 +28,16 @@ const getTasks = () => {
         })
         .then((res) => {
             tasks.value = res.data.map(task => {
+
+                  if (task.user && task.user.profilePicture) {
+                    task.user.profilePicture = `http://localhost:8080/Images/${task.user.profilePicture}`;
+                } else {
+                    task.user.profilePicture = "";
+                }
                 return {
                     ...task,
-                    isCompleted: task.isCompleted === 1
-
+                    isCompleted: task.isCompleted === 1,
+                  
                 }
             });
             console.log(tasks)
@@ -104,11 +110,17 @@ onMounted(() => {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="task in filteredTasks" :key="task.id" :class="reminder(task)" >
+                                <tr v-for="task in filteredTasks" :key="task.id" :class="reminder(task)">
                                     <th scope="row">{{ task.title }}</th>
                                     <td>{{ task.description }}</td>
                                     <td>{{ task.dueDate }}</td>
-                                    <td v-if="task.user">{{ task.user.username }}</td>
+                                    <td v-if="task.user">
+                                        <div class="d-flex align-items-center">
+                                            <img :src="task.user.profilePicture" alt="Profile Picture"
+                                                class="profile-picture" />
+                                            <span class="mx-2">{{ task.user.username }}</span>
+                                        </div>
+                                    </td>
                                     <td v-else></td>
                                     <td>
                                         <input type="checkbox" v-model="task.isCompleted"
@@ -129,3 +141,12 @@ onMounted(() => {
     </main>
 </template>
 
+<style scoped>
+.profile-picture {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 8px;
+}
+</style>
