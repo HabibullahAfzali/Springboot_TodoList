@@ -80,7 +80,7 @@ onMounted(() => {
 </script>
 <template>
     <main>
-        <Navbar />
+        <Navbar/>
         <!-- Table-->
         <div class="container">
             <div class="row ">

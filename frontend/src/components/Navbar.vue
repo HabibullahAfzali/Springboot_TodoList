@@ -8,7 +8,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-             <router-link to="/" exact class="nav-link" exact-active-class="active">Home</router-link>
+             <router-link to="/Viewusers" exact class="nav-link" exact-active-class="active">Users</router-link>
              <router-link to="/" exact class="nav-link" exact-active-class="active">Sign Up</router-link>
            
              <router-link to="/addtask" exact class="nav-link" exact-active-class="active">New Todolist</router-link>

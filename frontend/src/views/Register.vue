@@ -1,6 +1,6 @@
 <script setup>
 import Navbar from '../components/Navbar.vue';
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import axios from "axios";
 import { useRouter } from 'vue-router';
 
@@ -11,11 +11,9 @@ const user = ref({
 });
 const route = useRouter();
 const profilePicture = ref(null);
-
 const handleProfilePictureUpload = (event) => {
     profilePicture.value = event.target.files[0];
 }
-
 const signUp = () => {
     const formData = new FormData();
     for (const key in user.value) {
@@ -26,16 +24,22 @@ const signUp = () => {
     }
     axios.post('http://localhost:8080/users', formData).then(() => {
         alert("User successfully added!")
-        route.push('/');
+        route.push('/Viewusers');
     }).catch(error => {
         console.error('not able to add!', error);
     });
 }
-
+const isFormComplete = computed(() => {
+    return (
+        user.value.username.trim() !== '' &&
+        user.value.email.trim() !== '' &&
+        user.value.password.trim() !== ''
+    );
+});
 </script>
 <template>
     <main>
-        <Navbar />
+    <Navbar/>
         <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
             <div class="row gx-lg-5 align-items-center mb-5">
                 <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
@@ -63,7 +67,7 @@ const signUp = () => {
                                         <input type="file" @change="handleProfilePictureUpload($event)"
                                             class="form-control d-none" id="profilePictureInput" ref="fileInput" />
                                         <i class="bi bi-camera-fill"></i>
-                                        <span class="overlay-text">Change Photo</span>
+                                        <span class="overlay-text">Upload Photo</span>
                                     </label>
                                 </div>
                                 <div class="form-outline mb-4">
@@ -78,7 +82,7 @@ const signUp = () => {
                                     <input type="password" class="form-control" v-model="user.password" />
                                     <label class="form-label" for="form3Example4">Password</label>
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-block mb-4 form-control">
+                                <button type="submit" :disabled="!isFormComplete" class="btn btn-primary btn-block mb-4 form-control">
                                     Submit
                                 </button>
                                 <div class="text-center">
@@ -100,7 +104,7 @@ const signUp = () => {
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    background-color: #c8d0d9;
+    background-color: #e2e2df;
     text-align: center;
     line-height: 120px;
     cursor: pointer;
@@ -112,17 +116,6 @@ const signUp = () => {
 }
 
 .profile-picture-label:hover {
-    background-color: #0056b3;
-}
-
-.overlay-text {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: black;
-    font-weight: bold;
-    font-size: 14px;
+    background-color: #0a6fea;
 }
 </style>

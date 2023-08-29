@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import Navbar from '../components/Navbar.vue';
 import axios from 'axios';
@@ -40,13 +40,21 @@ const fetchUsers = () => {
             console.error('Role Not found!', error);
         });
 };
+const isCompleted = computed(() => {
+    return (
+        task.value.description.trim() !== '' &&
+        task.value.title.trim() !== '' &&
+        task.value.dueDate.trim() !== '' &&
+        selectedUser.value !== 'Select_from_list'   
+    );
+})
 onMounted(() => {
     fetchUsers();
 });
 </script>
 <template>
     <main>
-        <Navbar />
+        <Navbar/>
         <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
             <div class="row gx-lg-5 align-items-center mb-5">
                 <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
@@ -97,7 +105,7 @@ onMounted(() => {
                             <br><br>
                             <div class="form-outline mb-4">
                                 <div class="col-md-12 form-group">
-                                    <input class="btn btn-primary w-100" type="submit" value="Submit">
+                                    <input class="btn btn-primary w-100" type="submit" :disabled="!isCompleted" value="Submit">
                                 </div>
                             </div>
                             <div>
