@@ -10,9 +10,8 @@ public class User {
 	private String password;
 	private String email;
 	private String resetToken;
-	@Lob
-	@Column(name = "profile_picture", columnDefinition = "BLOB")
-	private byte[] profilePicture;
+
+	private String profilePicture;
 
 	public User() {
 	}
@@ -52,11 +51,11 @@ public class User {
 	public void setResetToken(String resetToken) {
 		this.resetToken = resetToken;
 	}
-	public byte[] getProfilePicture() {
+	public String getProfilePicture() {
 		return profilePicture;
 	}
 
-	public void setProfilePicture(byte[] profilePicture) {
+	public void setProfilePicture(String profilePicture) {
 		this.profilePicture = profilePicture;
 	}
 

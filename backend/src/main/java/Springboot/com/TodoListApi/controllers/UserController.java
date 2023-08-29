@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
-import java.util.Optional;
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/users")
@@ -19,18 +21,31 @@ import java.util.Optional;
 public class UserController {
 @Autowired
 	private  UserService userService;
+
+public static String uploadDirectory = System.getProperty("user.dir")+ "/src/main/webapp/Images";
 	@PostMapping
-	public ResponseEntity<String> createUser(@RequestBody User user){
-//Password Encoder
+	public ResponseEntity<String> createUser(@ModelAttribute User user,@RequestParam("image") MultipartFile file){
+String originalFilename = file.getOriginalFilename();
+Path fileNameAndPath = Paths.get(uploadDirectory,originalFilename);
+try {
+	Files.write(fileNameAndPath,file.getBytes());
+	user.setProfilePicture(originalFilename);
+	userService.saveUser(user);
+	return ResponseEntity.ok("User Created Successfully!");
+} catch (IOException e) {
+	throw new RuntimeException(e);
+}
+		//Password Encoder
 //		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 //		String encodedPassword = passwordEncoder.encode(user.getPassword());
 //		user.setPassword(encodedPassword);
 		// Before encoding
 		//System.out.println("Raw Password: " + user.getPassword());
-		 userService.saveUser(user);
+
+
 		// After encoding
 //		System.out.println("Encoded Password: " + encodedPassword);
-		 return ResponseEntity.ok("Successfully added!");
+
 	}
 	@GetMapping
 	public ResponseEntity< List<User>> getUsers(){
