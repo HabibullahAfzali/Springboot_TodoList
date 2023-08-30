@@ -41,7 +41,7 @@ public class TaskController {
 	}
 	@PutMapping("/{id}")
 	public ResponseEntity<String> editeTask(@RequestBody Task task, @PathVariable Long id) {
-		if (userService.getUserById(id).isPresent()) {
+		if (taskService.getTaskById(id).isPresent()) {
 			User selectedUser = userService.getAllUser().stream().filter(user -> user.getId().equals(task.getUser().getId())).findFirst().
 			orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"User not found with ID: "+ task.getUser().getId()));
 			task.setUser((selectedUser));
