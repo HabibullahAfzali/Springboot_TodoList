@@ -1,0 +1,19 @@
+{
+       "Users": "Usuari@s",
+      "SignUp": "Inscribirse",
+      "Newlist": "Nuevo plan",
+      "Todolist": "Tareas",
+      "username": "Nombre de usuario",
+       "email": "Correo electrónico",
+       "password": "contraseña",
+       "submit":"Enviar",
+       "login": "Iniciar sesión",
+       "message":"Ya tienes una cuenta",
+       "taskPageTitle": "Nueva Lista",
+       "Title": "Título",
+       "description": "Descripción",
+       "duedate": "Fecha de Vencimiento",
+       "assignTo": "Asignar a"
+
+
+}
