@@ -1,0 +1,21 @@
+ {
+  
+      "Users": "Users",
+      "SignUp": "Sign Up",
+      "Newlist": "New Plan",
+      "Todolist": "TodoLists",
+
+      "username":"User Name",
+      "email": "Email",
+      "password":"password",
+      "submit":"Submit",
+      "login" : "Loging",
+      "message":"Alreaday have an account",
+      "taskPageTitle":"New List",
+      "Title":"Title",
+      "description":"Description",
+      "duedate":"Due Date",
+      "assignTo":"Assign To"
+
+
+    }

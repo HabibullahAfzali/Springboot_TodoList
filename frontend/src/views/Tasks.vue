@@ -127,8 +127,10 @@ onMounted(() => {
                                             @change="updateCompletionStatus(task)">
                                     </td>
                                     <td>
+                                        <div class="button-group">
                                         <a class="btn btn-primary" :href="`/update/${task.id}`">Edit</a>
                                         <button class="btn btn-danger mx-2" @click="deleteTask(task.id)">Delete</button>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>
@@ -149,4 +151,16 @@ onMounted(() => {
     object-fit: cover;
     margin-right: 8px;
 }
-</style>
+
+.button-group {
+    display: flex;
+    align-items: center;
+}
+
+.button-edit,
+.button-delete {
+    flex: 1;
+    margin: 0 4px;
+    width: 100%;
+    max-width: 120px;
+}</style>
