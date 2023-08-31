@@ -47,7 +47,9 @@ const getTasks = () => {
         });
 };
 const updateCompletionStatus = (task) => {
-    axios.put(`http://localhost:8080/tasks/${task.id}/complete`)
+    axios.put(`http://localhost:8080/tasks/${task.id}/complete`).then(() => {
+        task.isCompleted = !task.isCompleted; 
+    })
         .catch((error) => {
             console.error('Not able to update task:', error);
         });
