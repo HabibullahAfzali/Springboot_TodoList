@@ -61,7 +61,7 @@ Acceder a la Aplicación: Abre tu navegador web y accede a http://localhost:8080
     
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot]([https://via.placeholder.com/468x300?text=App+Screenshot+Here](https://github.com/HabibullahAfzali/Springboot_TodoList/blob/development/frontend/src/assets/ScreenShots/SingUp.png)https://github.com/HabibullahAfzali/Springboot_TodoList/blob/development/frontend/src/assets/ScreenShots/SingUp.png)
 
 
 ## Tech Stack
