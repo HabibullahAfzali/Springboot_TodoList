@@ -9,13 +9,18 @@
       "email": "Email",
       "password":"password",
       "submit":"Submit",
-      "login" : "Loging",
+      "login" : "Login",
       "message":"Alreaday have an account",
       "taskPageTitle":"New List",
       "Title":"Title",
       "description":"Description",
       "duedate":"Due Date",
-      "assignTo":"Assign To"
+      "assignTo":"Assign To",
+      "taskListPageTitle":"Your Todo List",
+       "Action":"Action",
+       "Iscompleted" : "IsCompleted",
+       "btnNewTask":"New Task",
+       "RegisterUsers":"All Users"
 
 
     }

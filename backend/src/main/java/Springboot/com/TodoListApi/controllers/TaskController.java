@@ -51,22 +51,10 @@ public class TaskController {
 		}
 		return ResponseEntity.notFound().build();
 	}
-//	@PutMapping("/{id}/complete")
-//	public ResponseEntity<String> updateCompletionStatus(@PathVariable Long id) {
-//	Optional<Task> existingTaskOptional = taskService.getTaskById(id);
-//	if (existingTaskOptional.isPresent() & !existingTaskOptional.get().isCompleted()) {
-//		Task existingTask = existingTaskOptional.get();
-//			existingTask.setIsCompleted(true);
-//			taskService.updateTaskStatus(existingTask);
-//
-//			return ResponseEntity.ok("Completion Status Updated!");
-//		}
-//		return ResponseEntity.notFound().build();
-//	}
 
 	@PutMapping("/{id}/complete")
-	public ResponseEntity<String> updateCompletionStatus(@PathVariable Long taskId) {
-		Optional<Task> taskOptional = taskService.getTaskById(taskId);
+	public ResponseEntity<String> updateCompletionStatus(@PathVariable Long id) {
+		Optional<Task> taskOptional = taskService.getTaskById(id);
 
 		if (taskOptional.isPresent()) {
 			Task task = taskOptional.get();
@@ -78,6 +66,7 @@ public class TaskController {
 
 		return ResponseEntity.notFound().build();
 	}
+
 
 
 

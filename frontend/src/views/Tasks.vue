@@ -47,7 +47,9 @@ const getTasks = () => {
         });
 };
 const updateCompletionStatus = (task) => {
-    axios.put(`http://localhost:8080/tasks/${task.id}/complete`)
+    axios.put(`http://localhost:8080/tasks/${task.id}/complete`).then(() => {
+        task.isCompleted = !task.isCompleted; 
+    })
         .catch((error) => {
             console.error('Not able to update task:', error);
         });
@@ -86,11 +88,11 @@ onMounted(() => {
             <div class="row ">
                 <div class="col-md-12">
                     <div class="d-flex mt-3 justify-content-center">
-                        <h1 style="color: hsl(218, 81%, 75%)">Your Todo List</h1>
+                        <h1 style="color: hsl(218, 81%, 75%)">{{ $t("taskListPageTitle") }}</h1>
                     </div>
                     <!--Add button -->
                     <div class="d-flex justify-content-start" id="newtask">
-                        <a href="/addtask" class="btn btn-primary">New Task</a>
+                        <a href="/addtask" class="btn btn-primary">{{ $t("btnNewTask") }}</a>
                     </div>
                     <div class="input-group mb-3 mt-3">
                         <input type="text" class="form-control" v-model="filterUsername" @keyup.enter="applyFilter"
@@ -101,12 +103,12 @@ onMounted(() => {
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Description </th>
-                                    <th scope="col">Due Date</th>
-                                    <th scope="col">Assigned To</th>
-                                    <th scope="col">Is Completed?</th>
-                                    <th scope="col">Action</th>
+                                    <th scope="col">{{ $t("Title") }}</th>
+                                    <th scope="col">{{ $t("description") }} </th>
+                                    <th scope="col">{{ $t("duedate") }}</th>
+                                    <th scope="col">{{ $t("assignTo") }}</th>
+                                    <th scope="col">{{ $t("Iscompleted") }}</th>
+                                    <th scope="col">{{ $t("Action") }}</th>
                                 </tr>
                             </thead>
                             <tbody>

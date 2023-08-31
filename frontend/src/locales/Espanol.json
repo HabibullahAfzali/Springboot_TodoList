@@ -1,6 +1,6 @@
 {
        "Users": "Usuari@s",
-      "SignUp": "Inscribirse",
+      "SignUp": "Registrarse",
       "Newlist": "Nuevo plan",
       "Todolist": "Tareas",
       "username": "Nombre de usuario",
@@ -13,7 +13,13 @@
        "Title": "Título",
        "description": "Descripción",
        "duedate": "Fecha de Vencimiento",
-       "assignTo": "Asignar a"
+       "assignTo": "Asignar a",
+       "taskListPageTitle":"Tu Lista de Tareas",
+       "Action":"acción",
+       "Iscompleted" : "Tarea Terminada",
+       "btnNewTask":"Nueva Tarea",
+        "RegisterUsers":"Tod@s L@s Usuari@s"
+       
 
 
 }
