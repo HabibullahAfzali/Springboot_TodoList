@@ -12,7 +12,12 @@
       "Title": "عنوان",
       "description": "توضیحات",
       "duedate": "تاریخ ختم",
-      "assignTo": "واگذار به"
+      "assignTo": "واگذار به",
+      "taskListPageTitle":"لیست کار های شما",
+       "Action":"عمل",
+       "Iscompleted":"تکمیل شده",
+       "btnNewTask":"ایجاد لیست",
+        "RegisterUsers":"کاربران"
 }
 
 

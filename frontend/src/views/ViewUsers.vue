@@ -25,7 +25,7 @@ onMounted(async () => {
     <main>
         <Navbar/>
         <div class="container mt-5">
-            <h1 class="text-center mb-4" style="color: hsl(218, 81%, 75%)">Registered Users</h1>
+            <h1 class="text-center mb-4" style="color: hsl(218, 81%, 75%)">{{ $t("RegisterUsers") }}</h1>
             <div class="row justify-content-center">
                 <div class="col-md-4 mb-4" v-for="(user, index) in registeredUsers" :key="index">
                     <div class="card">
