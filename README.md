@@ -1,6 +1,6 @@
 # ToDoList
 
-ToDoList ha sido creado para mejorar la vida de los desarrolladors, facilitando la organización de sus Tasks. Su interfaz sencilla y facil de entender es crucial para dar una primera imagen de lo que queremos que sea una herramienta comoda y segura.
+ToDoList ha sido creado para mejorar la vida de los desarrolladores, facilitando la organización de sus Tasks. Su interfaz sencilla y facil de entender es crucial para dar una primera imagen de lo que queremos que sea una herramienta comoda y segura.
 
 
 
@@ -25,7 +25,11 @@ ToDoList ha sido creado para mejorar la vida de los desarrolladors, facilitando 
 - Marcar tareas completadas
 
 
-## Installation
+## Clone and Installation
+
+Clonar el Repositorio: Clona este repositorio en tu máquina local usando el siguiente comando:
+
+git clone https://github.com/HabibullahAfzali/Springboot_TodoList.git
 
 Install the project with npm
 
@@ -39,9 +43,6 @@ Install the project with npm
 
     Para el BackEnd:
   
-Clonar el Repositorio: Clona este repositorio en tu máquina local usando el siguiente comando:
-
-git clone https://github.com/HabibullahAfzali/Springboot_TodoList.git
 Base de Datos: Configura una base de datos MySQL en tu servidor local. Crea una base de datos llamada todolist_db.
 
 Configuración de la Base de Datos: Abre el archivo src/main/resources/application.properties y configura las propiedades de la base de datos de acuerdo a tu entorno:
