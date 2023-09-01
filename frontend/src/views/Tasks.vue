@@ -4,7 +4,6 @@ import Navbar from '../components/Navbar.vue';
 import axios from 'axios';
 
 const tasks = ref([]);
-const searchQuery = ref('');
 const filterUsername = ref('');
 const filteredTasks = ref([]);
 
@@ -18,13 +17,7 @@ const reminder = (task) => {
 const getTasks = () => {
     axios
         .get('http://localhost:8080/tasks', {
-            params: {
-                id: 0,
-                title: searchQuery.value,
-                description: searchQuery.value,
-                dueDate: searchQuery.value,
-                isCompleted: searchQuery.value
-            },
+          
         })
         .then((res) => {
             tasks.value = res.data.map(task => {
@@ -34,21 +27,20 @@ const getTasks = () => {
                 } else {
                     task.user.profilePicture = "";
                 }
-                return {
-                    ...task,
-                    isCompleted: task.isCompleted === 1,
-                  
-                }
+                task.isCompleted = task.isCompleted; 
+
+                return task;
             });
-            console.log(tasks)
+            console.log(tasks.value)
         })
         .catch((error) => {
             console.error('Not able to fetch tasks:', error);
         });
 };
 const updateCompletionStatus = (task) => {
-    axios.put(`http://localhost:8080/tasks/${task.id}/complete`).then(() => {
-        task.isCompleted = !task.isCompleted; 
+    const newStatus = !task.isCompleted;
+    axios.put(`http://localhost:8080/tasks/${task.id}/status`,{isCompleted:newStatus}).then(() => {
+
     })
         .catch((error) => {
             console.error('Not able to update task:', error);
