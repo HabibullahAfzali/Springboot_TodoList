@@ -20,9 +20,7 @@
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="0ef73022-6f0b-4e5d-a070-94ddded41cf8" object-ref="schemas/todolist_db/tables/task" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="0ef73022-6f0b-4e5d-a070-94ddded41cf8" dataset="todolist_db.user" active-filter-id="EMPTY_FILTER" />

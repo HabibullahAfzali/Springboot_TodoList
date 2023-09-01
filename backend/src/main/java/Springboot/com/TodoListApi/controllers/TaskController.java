@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -52,18 +51,17 @@ public class TaskController {
 		return ResponseEntity.notFound().build();
 	}
 
-	@PutMapping("/{id}/complete")
+	@PutMapping("/{id}/status")
 	public ResponseEntity<String> updateCompletionStatus(@PathVariable Long id) {
 		Optional<Task> taskOptional = taskService.getTaskById(id);
 
 		if (taskOptional.isPresent()) {
 			Task task = taskOptional.get();
-			task.setIsCompleted(true);
+			task.setIsCompleted(!task.getIsCompleted());
 			taskService.updateTaskStatus(task);
 
 			return ResponseEntity.ok("Completion Status Updated!");
 		}
-
 		return ResponseEntity.notFound().build();
 	}
 
