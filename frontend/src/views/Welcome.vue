@@ -37,7 +37,7 @@ import Navbar from '../components/Navbar.vue';
                                 </button>
                                 <div class="text-center">
                                     <p> Not have an account </p>
-                                    <a href="/register">Register</a>
+                                    <a href="/">Register</a>
                                 </div>
                             </form>
                         </div>

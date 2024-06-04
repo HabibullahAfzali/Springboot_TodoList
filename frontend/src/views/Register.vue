@@ -1,42 +1,3 @@
-<script setup>
-import Navbar from '../components/Navbar.vue';
-import { ref, computed } from 'vue'
-import axios from "axios";
-import { useRouter } from 'vue-router';
-
-const user = ref({
-    username: '',
-    email: '',
-    password: ''
-});
-const route = useRouter();
-const profilePicture = ref(null);
-const handleProfilePictureUpload = (event) => {
-    profilePicture.value = event.target.files[0];
-}
-const signUp = () => {
-    const formData = new FormData();
-    for (const key in user.value) {
-        formData.append(key, user.value[key]);
-    }
-    if (profilePicture.value) {
-        formData.append('image', profilePicture.value);
-    }
-    axios.post('http://localhost:8080/users', formData).then(() => {
-        alert("User successfully added!")
-        route.push('/Viewusers');
-    }).catch(error => {
-        console.error('not able to add!', error);
-    });
-}
-const isFormComplete = computed(() => {
-    return (
-        user.value.username.trim() !== '' &&
-        user.value.email.trim() !== '' &&
-        user.value.password.trim() !== ''
-    );
-});
-</script>
 <template>
     <main>
     <Navbar/>
@@ -97,6 +58,45 @@ const isFormComplete = computed(() => {
         </div>
     </main>
 </template>
+<script setup>
+import Navbar from '../components/Navbar.vue';
+import { ref, computed } from 'vue'
+import axios from "axios";
+import { useRouter } from 'vue-router';
+
+const user = ref({
+    username: '',
+    email: '',
+    password: ''
+});
+const route = useRouter();
+const profilePicture = ref(null);
+const handleProfilePictureUpload = (event) => {
+    profilePicture.value = event.target.files[0];
+}
+const signUp = () => {
+    const formData = new FormData();
+    for (const key in user.value) {
+        formData.append(key, user.value[key]);
+    }
+    if (profilePicture.value) {
+        formData.append('image', profilePicture.value);
+    }
+    axios.post('http://localhost:8080/users', formData).then(() => {
+        alert("User successfully added!")
+        route.push('/Viewusers');
+    }).catch(error => {
+        console.error('not able to add!', error);
+    });
+}
+const isFormComplete = computed(() => {
+    return (
+        user.value.username.trim() !== '' &&
+        user.value.email.trim() !== '' &&
+        user.value.password.trim() !== ''
+    );
+});
+</script>
 
 <style scoped>
 .profile-picture-label {

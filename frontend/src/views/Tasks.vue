@@ -1,77 +1,3 @@
-<script setup>
-import { ref, onMounted } from 'vue';
-import Navbar from '../components/Navbar.vue';
-import axios from 'axios';
-
-const tasks = ref([]);
-const filterUsername = ref('');
-const filteredTasks = ref([]);
-
-const reminder = (task) => {
-    const currentDate = new Date();
-    const dueDateValue = new Date(task.dueDate);
-    const timeRemainingInDays = Math.ceil((dueDateValue - currentDate) / (1000 * 60 * 60 * 24));
-    return timeRemainingInDays < 2 ? "table-danger" : "";
-};
-
-const getTasks = () => {
-    axios
-        .get('http://localhost:8080/tasks', {
-          
-        })
-        .then((res) => {
-            tasks.value = res.data.map(task => {
-
-                  if (task.user && task.user.profilePicture) {
-                    task.user.profilePicture = `http://localhost:8080/Images/${task.user.profilePicture}`;
-                } else {
-                    task.user.profilePicture = "";
-                }
-                task.isCompleted = task.isCompleted; 
-
-                return task;
-            });
-            console.log(tasks.value)
-        })
-        .catch((error) => {
-            console.error('Not able to fetch tasks:', error);
-        });
-};
-const updateCompletionStatus = (task) => {
-    const newStatus = !task.isCompleted;
-    axios.put(`http://localhost:8080/tasks/${task.id}/status`,{isCompleted:newStatus}).then(() => {
-
-    })
-        .catch((error) => {
-            console.error('Not able to update task:', error);
-        });
-};
-const deleteTask = (id) => {
-    axios
-        .delete(`http://localhost:8080/tasks/${id}`)
-        .then(() => {
-            getTasks();
-            deleteSuccess.value = true;
-            setTimeout(() => {
-                deleteSuccess.value = false;
-            }, 5000);
-        })
-        .catch((error) => {
-            console.error('Not able to fetch task:', error);
-        });
-};
-const applyFilter = () => {
-    filteredTasks.value = tasks.value.filter(task => {
-        if (!filterUsername.value.trim() || task.user && task.user.username.toLowerCase().includes(filterUsername.value.toLowerCase())) {
-            return true;
-        }
-        return false;
-    });
-};
-onMounted(() => {
-    getTasks();
-});
-</script>
 <template>
     <main>
         <Navbar/>
@@ -136,6 +62,83 @@ onMounted(() => {
 
     </main>
 </template>
+<script setup>
+import { ref, onMounted } from 'vue';
+import Navbar from '../components/Navbar.vue';
+import axios from 'axios';
+
+const tasks = ref([]);
+const filterUsername = ref('');
+const filteredTasks = ref([]);
+
+const reminder = (task) => {
+    if (task.isCompleted) {
+        return "";
+    }
+    const currentDate = new Date();
+    const dueDateValue = new Date(task.dueDate);
+    const timeRemainingInDays = Math.ceil((dueDateValue - currentDate) / (1000 * 60 * 60 * 24));
+    return timeRemainingInDays < 2 ? "table-danger" : "";
+};
+
+const getTasks = () => {
+    axios
+        .get('http://localhost:8080/tasks', {
+          
+        })
+        .then((res) => {
+            tasks.value = res.data.map(task => {
+
+                  if (task.user && task.user.profilePicture) {
+                    task.user.profilePicture = `http://localhost:8080/Images/${task.user.profilePicture}`;
+                } else {
+                    task.user.profilePicture = "";
+                }
+                task.isCompleted = task.isCompleted; 
+
+                return task;
+            });
+            console.log(tasks.value)
+        })
+        .catch((error) => {
+            console.error('Not able to fetch tasks:', error);
+        });
+};
+const updateCompletionStatus = (task) => {
+    const newStatus = !task.isCompleted;
+    axios.put(`http://localhost:8080/tasks/${task.id}/status`,{isCompleted:newStatus}).then(() => {
+
+    })
+        .catch((error) => {
+            console.error('Not able to update task:', error);
+        });
+};
+const deleteTask = (id) => {
+    axios
+        .delete(`http://localhost:8080/tasks/${id}`)
+        .then(() => {
+            getTasks();
+            deleteSuccess.value = true;
+            setTimeout(() => {
+                deleteSuccess.value = false;
+            }, 5000);
+        })
+        .catch((error) => {
+            console.error('Not able to fetch task:', error);
+        });
+};
+const applyFilter = () => {
+    filteredTasks.value = tasks.value.filter(task => {
+        if (!filterUsername.value.trim() || task.user && task.user.username.toLowerCase().includes(filterUsername.value.toLowerCase())) {
+            return true;
+        }
+        return false;
+    });
+};
+onMounted(() => {
+    getTasks();
+});
+</script>
 
 <style scoped>
 .profile-picture {

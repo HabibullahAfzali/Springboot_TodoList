@@ -49,6 +49,7 @@ onMounted(async () => {
     border-radius: 50%;
     overflow: hidden;
     margin: 0 auto;
+    border: 0.3rem solid salmon;
 }
 
 .profile-picture img {
